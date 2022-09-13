@@ -12,9 +12,12 @@ public class Ex45 {
 		
 		List<Integer> lista = new ArrayList<>();
 		
-		int i, num, soma;
+		int i, num, soma, qntd;
+		
+		System.out.printf("Digite a quantidade de números que deseja inserir: ");
+		qntd = ler.nextInt();
 
-		for (i = 1; i <= 10; i++) {
+		for (i = 1; i <= qntd; i++) {
 			System.out.printf("Digite o %dº número: ", i);
 		    num = ler.nextInt();
 		    while (num < 0) {
