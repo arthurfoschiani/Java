@@ -10,9 +10,8 @@ public class Ex45 {
 		
 		Scanner ler = new Scanner(System.in);
 		
-		List<Integer> lista = new ArrayList<>();
-		
-		int i, num, soma, qntd;
+		int i, qntd;
+		float soma = 0, num, maior = 0, menor = 0, negativo = 0, positivo = 0;
 		
 		System.out.printf("Digite a quantidade de números que deseja inserir: ");
 		qntd = ler.nextInt();
@@ -20,28 +19,31 @@ public class Ex45 {
 		for (i = 1; i <= qntd; i++) {
 			System.out.printf("Digite o %dº número: ", i);
 		    num = ler.nextInt();
-		    while (num < 0) {
-		    	System.out.printf("Digite o %dº valor novamente: ", i);
-			    num = ler.nextInt();
+		    if (i == 1){
+		        maior = num;
+		        menor = num;
 		    }
-		    lista.add(num);
-		}
-		
-		soma = 0;		
-		int maxValue = 0;
-		int minValue = 0;
-		
-		for (Integer integer : lista) {
-            if (integer > maxValue)
-                maxValue = integer;
-            else if (integer < minValue)
-                minValue = integer;
-            soma += integer;
-        }
+		    else {
+		        if (num >= maior)
+		            maior = num;
+		        else if (num <= menor)
+		            menor = num;
+		    }
+		        
+		    if (num < 0)
+		        negativo += 1;
+		    else
+		        positivo += 1;
 
-		System.out.printf("O maior valor é %d\n", maxValue);
-		System.out.printf("A soma desses valores é %d\n", soma);
-		System.out.printf("A média desses valores é %d\n", soma/lista.size());
+		    soma += num;
+		}
+
+		System.out.printf("O maior valor é %.0f\n", maior);
+		System.out.printf("O menor valor é %.0f\n", menor);
+		System.out.printf("A soma desses valores é %.0f\n", soma);
+		System.out.printf("A média desses valores é %.0f\n", soma/qntd);
+		System.out.printf("A porcentagem de números positivos é %.1f porcento\n", (positivo/qntd)*100);
+		System.out.printf("A porcentagem de números negativos é %.1f porcento\n", (negativo/qntd)*100);
 
 	}
 

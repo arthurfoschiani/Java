@@ -15,39 +15,40 @@ public class Ex46 {
 		
 		while(r.equals("S")) {
 			
-			List<Integer> lista = new ArrayList<>();
-			
-			int i, num, soma, qntd;
+			int i, qntd;
+			float soma = 0, num, maior = 0, menor = 0, negativo = 0, positivo = 0;
 			
 			System.out.printf("Digite a quantidade de números que deseja inserir: ");
 			qntd = ler.nextInt();
-	
+
 			for (i = 1; i <= qntd; i++) {
 				System.out.printf("Digite o %dº número: ", i);
 			    num = ler.nextInt();
-			    lista.add(num);
-			}
-			
-			List<Integer> positivo = new ArrayList<>();
-			List<Integer> negativo = new ArrayList<>();
-			soma = 0;
-			
-			Collections.sort(lista);
-	
-			System.out.printf("O maior valor é %d\n", lista.get(lista.size() - 1));
-			System.out.printf("O menor valor é %d\n", lista.get(lista.size() - lista.size()));
-			System.out.printf("A soma desses valores é %d\n", soma);
-			System.out.printf("A média desses valores é %d\n", soma/lista.size());
-			for (Integer item : lista) {
-	            if (item >= 0)
-	                positivo.add(item);
-	            else
-	            	negativo.add(item);
-	        }
-			System.out.printf("A porcentagem de números positivos é %d porcento\n", (positivo.size()/lista.size())*100);
-			System.out.printf("A porcentagem de números negativos é %d porcento\n", (negativo.size()/lista.size())*100);
+			    if (i == 1){
+			        maior = num;
+			        menor = num;
+			    }
+			    else {
+			        if (num >= maior)
+			            maior = num;
+			        else if (num <= menor)
+			            menor = num;
+			    }
+			        
+			    if (num < 0)
+			        negativo += 1;
+			    else
+			        positivo += 1;
 
-			
+			    soma += num;
+			}
+
+			System.out.printf("O maior valor é %.0f\n", maior);
+			System.out.printf("O menor valor é %.0f\n", menor);
+			System.out.printf("A soma desses valores é %.0f\n", soma);
+			System.out.printf("A média desses valores é %.0f\n", soma/qntd);
+			System.out.printf("A porcentagem de números positivos é %.1f porcento\n", (positivo/qntd)*100);
+			System.out.printf("A porcentagem de números negativos é %.1f porcento\n", (negativo/qntd)*100);
 			
 			System.out.printf("Você deseja realizar uma nova execução? (S/N) ");
 			r = ler.next().toUpperCase();

@@ -7,7 +7,8 @@ public class Ex42F {
 	public static void main(String[] args) {
 		Scanner ler = new Scanner(System.in);
 		
-		int n, baixo, cima, i;
+		int n, i;
+		float total, soma = 0, cima, baixo;
 		
 		System.out.printf("Digite um valor: ");
 	    n = ler.nextInt();
@@ -22,9 +23,13 @@ public class Ex42F {
 
 		for (i = 1; i <= n; i++) {
 		    System.out.printf(cima + "/" + baixo + "\n");
+		    total = cima / baixo;
+		    soma += total;
 		    cima = baixo;
 		    baixo += 1;
 		}
+		
+		System.out.printf("%.1f", soma);
 	}
 
 }
