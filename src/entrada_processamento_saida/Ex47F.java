@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class Ex47 {
+public class Ex47F {
 
 	public static void main(String[] args) {
 		

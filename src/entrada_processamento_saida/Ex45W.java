@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Ex45 {
+public class Ex45W {
 
 	public static void main(String[] args) {
 		
 		Scanner ler = new Scanner(System.in);
 		
-		int i, qntd;
+		int i = 1, qntd;
 		float soma = 0, num, maior = 0, menor = 0, negativo = 0, positivo = 0;
 		
 		System.out.printf("Digite a quantidade de números que deseja inserir: ");
 		qntd = ler.nextInt();
-
-		for (i = 1; i <= qntd; i++) {
+		
+		while (i <= qntd) {
 			System.out.printf("Digite o %dº número: ", i);
 		    num = ler.nextInt();
 		    if (i == 1){
@@ -36,6 +36,7 @@ public class Ex45 {
 		        positivo += 1;
 
 		    soma += num;
+		    i++;
 		}
 
 		System.out.printf("O maior valor é %.0f\n", maior);

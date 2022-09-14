@@ -2,7 +2,7 @@ package entrada_processamento_saida;
 
 import java.util.Scanner;
 
-public class Ex48 {
+public class Ex48DW {
 
 	public static void main(String[] args) {
 		
@@ -13,9 +13,12 @@ public class Ex48 {
 		System.out.printf("Digite um número: ");
 		num = ler.nextInt();
 
-		for (int i = 1; i <= 20; i++) {
+		int i = 1;
+		
+		do {
 		    num += 1;
 		    System.out.println(num);
-		}
+		    i++;
+		}while ( i <= 20 );
 	}
 }

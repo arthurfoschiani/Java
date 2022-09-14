@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class Ex46 {
+public class Ex46DW {
 
 	public static void main(String[] args) {
 		
@@ -15,13 +15,13 @@ public class Ex46 {
 		
 		while(r.equals("S")) {
 			
-			int i, qntd;
+			int i = 1, qntd;
 			float soma = 0, num, maior = 0, menor = 0, negativo = 0, positivo = 0;
 			
 			System.out.printf("Digite a quantidade de números que deseja inserir: ");
 			qntd = ler.nextInt();
 
-			for (i = 1; i <= qntd; i++) {
+			do {
 				System.out.printf("Digite o %dº número: ", i);
 			    num = ler.nextInt();
 			    if (i == 1){
@@ -41,7 +41,8 @@ public class Ex46 {
 			        positivo += 1;
 
 			    soma += num;
-			}
+			    i++;
+			}while ( i <= qntd);
 
 			System.out.printf("O maior valor é %.0f\n", maior);
 			System.out.printf("O menor valor é %.0f\n", menor);
