@@ -6,10 +6,10 @@ public class Ex53ProgramaF {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Ex53Aluno[] alunos = new Ex53Aluno[5];
+		Ex53Aluno[] alunos = new Ex53Aluno[2];
 		Scanner ler = new Scanner(System.in);
 		
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < alunos.length; i++) {
 			Ex53Aluno aluno = new Ex53Aluno();
 			System.out.printf("Digite o ra do %dº aluno: ", i+1);
 			aluno.ra = ler.next();
@@ -22,14 +22,18 @@ public class Ex53ProgramaF {
 			}
 			aluno.materia = materias;
 			System.out.printf("Digite o periodo do %dº aluno: ", i+1);
-			aluno.periodo = ler.next();
+			aluno.periodo = ler.next().toLowerCase();
 			
 			alunos[i] = aluno;
 		}
 		
-		for (int i = 0; i < 5; i++) {
-			if (alunos[i].periodo.equals("noturno"))
+		for (int i = 0; i < alunos.length; i++) {
+			if (alunos[i].periodo.equals("noturno")) {
 				System.out.printf("O %dº alunos se chama %s\n", i+1, alunos[i].nome);
+				for(int j = 0; j < alunos[i].materia.length; j++) {
+					System.out.printf("A %dº matéria do %d aluno é %s\n", j+1, i+1, alunos[i].materia[j]);
+				}
+			}
 		}
 	}
 }
