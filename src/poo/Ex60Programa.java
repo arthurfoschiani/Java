@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Ex59Programa {
+public class Ex60Programa {
 
 	public static void main(String[] args) throws IOException {
 		
 		Scanner ler = new Scanner(System.in);
 	       
-        ArrayList<Ex59Cliente> listaClientes = new ArrayList<>();
+        ArrayList<Ex60Cliente> listaClientes = new ArrayList<>();
        
         int opcao;
         int id = 0;
@@ -22,6 +22,7 @@ public class Ex59Programa {
         int index = -1;
         int index2 = -1;
         int idCliente;
+        int numConta = 1223;
  
         do {        
             System.out.printf("===> Banco Macgyver <===\n\n");
@@ -30,15 +31,16 @@ public class Ex59Programa {
                               "2 - Deposito \n" +
                               "3 - Saque \n" +
                               "4 - Transferência \n" +
-                              "5 - Consulta de saldo \n" +
-                              "6 - Sair\n\n");
+                              "5 - Consulta de saldo e limite \n" +
+                              "6 - Extrato \n" +
+                              "7 - Sair\n\n");
             System.out.printf("Digite a opção desejada: ");
             opcao = ler.nextInt();
             
             if (opcao == 1) {
     			char possuiConta;
     			
-            	Ex59Cliente cliente = new Ex59Cliente();
+            	Ex60Cliente cliente = new Ex60Cliente();
             	
             	if (listaClientes.size() != 0) {
             		idCliente = listaClientes.get(listaClientes.size() - 1).getId() + 1;
@@ -65,19 +67,16 @@ public class Ex59Programa {
 				 */
     			
     			/*if (possuiConta == 'S') {*/	
-    				String agencia;
-    				String numero;
-    				Double saldo;				
+    				int agencia;
     				
     				System.out.printf("Digite a agencia do cliente: ");
-    				agencia = ler.next();
+    				agencia = ler.nextInt();
     				
-    				System.out.printf("Digite a número da conta do cliente: ");
-    				numero = ler.next();
+    				ArrayList<String> extrato = new ArrayList<>();
     				
-    				saldo = 0.0;
+    				Ex60ContaBancaria conta = new Ex60ContaBancaria(agencia, numConta, extrato);
     				
-    				Ex59ContaBancaria conta = new Ex59ContaBancaria(agencia, numero, saldo);
+    				numConta++;
     				
     				cliente.setConta(conta);
 					/*
@@ -92,7 +91,7 @@ public class Ex59Programa {
             else if (opcao == 2) {
             	index = -1;
             	if (listaClientes.size() != 0) {
-	            	for (Ex59Cliente c: listaClientes) {
+	            	for (Ex60Cliente c: listaClientes) {
 	            		System.out.println(c.exibirNomeIdade());
 	        			if (c.getConta() != null)
 	        				System.out.println(c.exibirDadosConta());
@@ -104,7 +103,7 @@ public class Ex59Programa {
 	            	id = ler.nextInt();
 	            	
 	            	         	
-	            	for(Ex59Cliente c: listaClientes) {
+	            	for(Ex60Cliente c: listaClientes) {
 	            		if(c.getId() == id) {
 	            			index = listaClientes.indexOf(c);
 	            			break;
@@ -118,11 +117,13 @@ public class Ex59Programa {
 	            		while (valor < 0) {
 	            			System.out.printf("Valor inválido. Digite novamente: ");
 		            		valor = ler.nextDouble();
-	            		}          		
+	            		}
 	            		
-	            		Ex59Cliente cliente = listaClientes.get(index);
-		            	
+	            		Ex60Cliente cliente = listaClientes.get(index);
+	            		
 		            	cliente.getConta().depositar(valor);
+		            	
+		            	cliente.getConta().setExtrato("Deposito", valor, "p");
 		    			
 		    			System.out.printf("Depósito realizado com sucesso!");
 	            	}
@@ -138,7 +139,7 @@ public class Ex59Programa {
             else if (opcao == 3) {
             	index = -1;
             	if (listaClientes.size() != 0) {
-	            	for (Ex59Cliente c: listaClientes) {
+	            	for (Ex60Cliente c: listaClientes) {
 	            		System.out.println(c.exibirNomeIdade());
 	        			if (c.getConta() != null)
 	        				System.out.println(c.exibirDadosConta());
@@ -150,7 +151,7 @@ public class Ex59Programa {
 	            	id = ler.nextInt();
 	            	
            	
-	            	for(Ex59Cliente c: listaClientes) {
+	            	for(Ex60Cliente c: listaClientes) {
 	            		if(c.getId() == id) {
 	            			index = listaClientes.indexOf(c);
 	            			break;
@@ -166,9 +167,10 @@ public class Ex59Programa {
 		            		valor = ler.nextDouble();
 	            		}
 
-	            		Ex59Cliente cliente = listaClientes.get(index);
+	            		Ex60Cliente cliente = listaClientes.get(index);
 		            	
 		            	if (cliente.getConta().sacar(valor)) {
+		            		cliente.getConta().setExtrato("Saque", valor, "n");
 		            		System.out.printf("Saque realizado com sucesso!");
 		            	} else {
 		            		System.out.printf("Cliente sem saldo suficiente!");
@@ -185,7 +187,7 @@ public class Ex59Programa {
             }
             else if (opcao == 4) {
             	if (listaClientes.size() != 0) {
-	            	for (Ex59Cliente c: listaClientes) {
+	            	for (Ex60Cliente c: listaClientes) {
 	            		System.out.println(c.exibirNomeIdade());
 	        			if (c.getConta() != null)
 	        				System.out.println(c.exibirDadosConta());
@@ -200,14 +202,14 @@ public class Ex59Programa {
 	            	id = ler.nextInt();
 	            	
            	
-	            	for(Ex59Cliente c: listaClientes) {
+	            	for(Ex60Cliente c: listaClientes) {
 	            		if(c.getId() == idFonte) {
 	            			index2 = listaClientes.indexOf(c);
 	            			break;
 	            		}
 	            	}
 	            	
-	            	for(Ex59Cliente c: listaClientes) {
+	            	for(Ex60Cliente c: listaClientes) {
 	            		if(c.getId() == id) {
 	            			index = listaClientes.indexOf(c);
 	            			break;
@@ -215,8 +217,8 @@ public class Ex59Programa {
 	            	}
 	            	
 	            	if (index != -1 && index2 != -1) {
-	            		Ex59Cliente clienteFonte = listaClientes.get(index2);
-	            		Ex59Cliente cliente = listaClientes.get(index);
+	            		Ex60Cliente clienteFonte = listaClientes.get(index2);
+	            		Ex60Cliente cliente = listaClientes.get(index);
 	
 	            		if (cliente != clienteFonte) {
 	            			System.out.printf("Digite o valor da transferência: ");
@@ -228,7 +230,9 @@ public class Ex59Programa {
 		            		}
 			            	
 			            	if (clienteFonte.getConta().transferir(valor, cliente)) {
-			            		System.out.printf("Saque realizado com sucesso!");
+			            		clienteFonte.getConta().setExtrato("Transferência realizada", valor, "n");
+			            		cliente.getConta().setExtrato("Tranferência recebida", valor, "p");
+			            		System.out.printf("Transferência realizada com sucesso!");
 			            	} else {
 			            		System.out.printf("Cliente sem saldo suficiente!");
 			            	}
@@ -248,14 +252,14 @@ public class Ex59Programa {
             }
             else if (opcao == 5) {
             	if (listaClientes.size() != 0) {
-            		for (Ex59Cliente c: listaClientes) {
+            		for (Ex60Cliente c: listaClientes) {
 	            		System.out.println(c.exibirNomeIdade());
 	            	}
             		
-            		System.out.printf("Digite o ID do cliente que deseja saber o saldo: ");
+            		System.out.printf("Digite o ID do cliente que deseja saber o saldo e o limite: ");
 	            	id = ler.nextInt();
 	            	
-	            	for(Ex59Cliente c: listaClientes) {
+	            	for(Ex60Cliente c: listaClientes) {
 	            		if(c.getId() == id) {
 	            			index = listaClientes.indexOf(c);
 	            			break;
@@ -263,7 +267,7 @@ public class Ex59Programa {
 	            	}
 	            	
 	            	if (index != -1) {
-		            	Ex59Cliente cliente = listaClientes.get(index);
+		            	Ex60Cliente cliente = listaClientes.get(index);
 		            	
 		            	System.out.printf(cliente.getConta().consultarSaldo());
 	            	}
@@ -276,6 +280,45 @@ public class Ex59Programa {
             	}
                 System.in.read();
             }
-        }while(opcao >= 1 && opcao <= 5);
+            else if (opcao == 6) {
+            	if (listaClientes.size() != 0) {
+            		for (Ex60Cliente c: listaClientes) {
+	            		System.out.println(c.exibirNomeIdade());
+	            	}
+            		
+            		System.out.printf("Digite o ID do cliente que deseja ver o extrato: ");
+	            	id = ler.nextInt();
+	            	
+	            	for(Ex60Cliente c: listaClientes) {
+	            		if(c.getId() == id) {
+	            			index = listaClientes.indexOf(c);
+	            			break;
+	            		}
+	            	}
+	            	
+	            	if (index != -1) {
+		            	Ex60Cliente cliente = listaClientes.get(index);
+		            	
+		            	if (cliente.getConta().getExtrato().size() != 0) {		            		
+		            		for(String e: cliente.getConta().getExtrato()) {
+		            			System.out.printf(e + "\n");
+		            		}
+		            		System.out.println("------------------------------------");
+		            		System.out.printf("Saldo final: " + cliente.getConta().getSaldo());
+		            	}
+		            	else {
+		            		System.out.printf("Não há transações na conta deste cliente");
+		            	}
+	            	}
+	            	else {
+	            		System.out.printf("ID não encontrado");
+	            	}
+            	}
+            	else {
+            		System.out.printf("Não há clientes cadastrados.");
+            	}
+                System.in.read();
+            }
+        }while(opcao >= 1 && opcao <= 6);
 	}
 }
